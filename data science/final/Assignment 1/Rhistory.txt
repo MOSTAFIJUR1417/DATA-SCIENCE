@@ -1,0 +1,399 @@
+library('dplyr')
+file <- read.csv('data/train.csv')
+file <- read.csv("C:/Users/ASUS/Desktop/Data Science/Final/Assignment 1/data/train.csv")
+anova_result <- aov( Number.of.Dependents ~ Attrition , data=file)
+summary(anova_result)
+anova_result$model
+anova_result$coefficients
+summary(anova_result)
+library('dplyr')
+file <- read.csv('data/train.csv')
+file <- read.csv("C:/Users/ASUS/Desktop/Data Science/Final/Assignment 1/data/train.csv")
+print(file)
+summary(file)
+colSums(is.na(file))
+count(file)
+file$Employee.ID <- NULL
+length(file)
+head(file,10)
+chatagorical_columns <- names(file)[sapply(file, function(col) is.factor(col) || is.character(col))]
+chatagorical_columns <- setdiff(chatagorical_columns, "Attrition")
+catagorical_columns <- names(file)[sapply(file, function(col) is.factor(col) || is.character(col))]
+catagorical_columns <- setdiff(chatagorical_columns, "Attrition")
+anova_result <- aov( Number.of.Dependents ~ Attrition , data=file)
+summary(anova_result)
+numeric_column <- names(file)[sapply(file, function(x) is.numeric(x) || is.integer(x))]
+print(numeric_column)
+# Get numeric columns
+numeric_columns <- names(file)[sapply(file, is.numeric)]
+# Prepare dataframe to store results
+anova_results <- data.frame(
+Variable = character(),
+Target = character(),
+F_Value = numeric(),
+P_Value = numeric(),
+stringsAsFactors = FALSE
+)
+# Run ANOVA for each numeric column
+for (col in numeric_columns) {
+formula <- as.formula(paste(col, "~ Attrition"))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = f_val,
+P_Value = p_val
+))
+}
+# View results sorted by significance
+anova_results <- anova_results[order(anova_results$P_Value), ]
+print(anova_results)
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = f_val,
+P_Value = round(p_val.value, 8)
+))
+# Run ANOVA for each numeric column
+for (col in numeric_columns) {
+formula <- as.formula(paste(col, "~ Attrition"))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = f_val,
+P_Value = round(p_val.value, 8)
+))
+}
+# Run ANOVA for each numeric column
+for (col in numeric_columns) {
+formula <- as.formula(paste(col, "~ Attrition"))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = f_val,
+P_Value = round(p_val, 8)
+))
+}
+# View results sorted by significance
+anova_results <- anova_results[order(anova_results$P_Value), ]
+print(anova_results)
+for (col in numeric_columns) {
+formula <- as.formula(paste(col, "~ Attrition"))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = round(f_val, 4),
+P_Value = round(p_val, 8),
+stringsAsFactors = FALSE
+))
+}
+# View results sorted by significance
+anova_results <- anova_results[order(anova_results$P_Value), ]
+print(anova_results)
+anova_results$F_Value <- round(anova_results$F_Value, 4)
+anova_results$P_Value <- round(anova_results$P_Value, 8)
+# View results sorted by significance
+anova_results <- anova_results[order(anova_results$P_Value), ]
+print(anova_results)
+# Run ANOVA for each numeric column
+anova_results <- data.frame(
+Variable = character(),
+Target = character(),
+F_Value = numeric(),
+P_Value = numeric(),
+stringsAsFactors = FALSE
+)
+for (col in numeric_columns) {
+formula <- as.formula(paste(col, "~ Attrition"))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = round(f_val, 4),
+P_Value = round(p_val, 8),
+stringsAsFactors = FALSE
+))
+}
+anova_results$F_Value <- round(anova_results$F_Value, 4)
+anova_results$P_Value <- round(anova_results$P_Value, 8)
+# View results sorted by significance
+anova_results <- anova_results[order(anova_results$P_Value), ]
+print(anova_results)
+# Run ANOVA for each numeric column
+anova_results <- data.frame(
+Variable = character(),
+Target = character(),
+F_Value = numeric(),
+P_Value = numeric(),
+stringsAsFactors = FALSE
+)
+for (col in numeric_columns) {
+formula <- as.formula(paste(col, "~ Attrition"))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = round(f_val, 4),
+P_Value = round(p_val, 8),
+stringsAsFactors = FALSE
+))
+}
+file$Attrition <- ifelse(file$Attrition =="Stayed", 1, 0)
+for( col in catagorical_columns)
+{
+formula <- as.formula(paste(col, "~ Attrition"))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = round(f_val, 4),
+P_Value = round(p_val, 8),
+stringsAsFactors = FALSE
+))
+}
+for( col in catagorical_columns)
+{
+formula <- as.formula(paste("Attrition ~ " col))
+for( col in catagorical_columns)
+{
+formula <- as.formula(paste("Attrition ~ ", col))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = round(f_val, 4),
+P_Value = round(p_val, 8),
+stringsAsFactors = FALSE
+))
+}
+anova_results$F_Value <- round(anova_results$F_Value, 4)
+anova_results$P_Value <- round(anova_results$P_Value, 8)
+# View results sorted by significance
+anova_results <- anova_results[order(anova_results$P_Value), ]
+print(anova_results)
+library('dplyr')
+file <- read.csv('data/train.csv')
+print(file)
+summary(file)
+colSums(is.na(file))
+count(file)
+file$Employee.ID <- NULL
+length(file)
+head(file,10)
+catagorical_columns <- names(file)[sapply(file, function(col) is.factor(col) || is.character(col))]
+catagorical_columns <- setdiff(chatagorical_columns, "Attrition")
+catagorical_columns <- names(file)[sapply(file, function(col) is.factor(col) || is.character(col))]
+catagorical_columns <- setdiff(catagorical_columns, "Attrition")
+chi_results <- data.frame(
+Variable=character(),
+Target = character(),
+Chi_Square = numeric(),
+DF = integer(),
+P_Value = numeric()
+)
+for (column in chatagorical_columns)
+{
+tabulate_data <- table(file[[column]], file$Attrition)
+chi_result <- chisq.test(tabulate_data)
+chi_results <- rbind(chi_results, data.frame(
+Variable = column,
+Target = "Attrition",
+Chi_result = chi_result$statistic,
+DF = chi_result$parameter,
+P_Value = round(chi_result$p.value, 8)
+))
+}
+for (column in catagorical_columns)
+{
+tabulate_data <- table(file[[column]], file$Attrition)
+chi_result <- chisq.test(tabulate_data)
+chi_results <- rbind(chi_results, data.frame(
+Variable = column,
+Target = "Attrition",
+Chi_result = chi_result$statistic,
+DF = chi_result$parameter,
+P_Value = round(chi_result$p.value, 8)
+))
+}
+print(chi_results)
+anova_result <- aov( Number.of.Dependents ~ Attrition , data=file)
+summary(anova_result)
+numeric_column <- names(file)[sapply(file, function(x) is.numeric(x) || is.integer(x))]
+print(numeric_column)
+anova_results <- data.frame(
+Variable = character(),
+Target = character(),
+F_Value = numeric(),
+Pr(F) = numeric()
+for (col in numeric_column)
+anova_results <- data.frame(
+Variable = character(),
+Target = character(),
+F_Value = numeric(),
+P_Value = numeric(),
+stringsAsFactors = FALSE
+)
+for (col in numeric_columns) {
+formula <- as.formula(paste(col, "~ Attrition"))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = round(f_val, 4),
+P_Value = round(p_val, 8),
+stringsAsFactors = FALSE
+))
+}
+numeric_columns <- names(file)[sapply(file, function(x) is.numeric(x) || is.integer(x))]
+print(numeric_columns)
+anova_results <- data.frame(
+Variable = character(),
+Target = character(),
+F_Value = numeric(),
+P_Value = numeric(),
+stringsAsFactors = FALSE
+)
+for (col in numeric_columns) {
+formula <- as.formula(paste(col, "~ Attrition"))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = round(f_val, 4),
+P_Value = round(p_val, 8),
+stringsAsFactors = FALSE
+))
+}
+file$Attrition <- ifelse(file$Attrition =="Stayed", 1, 0)
+for( col in catagorical_columns)
+{
+formula <- as.formula(paste("Attrition ~ ", col))
+result <- summary(aov(formula, data = file))
+f_val <- result[[1]]$`F value`[1]
+p_val <- result[[1]]$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = round(f_val, 4),
+P_Value = round(p_val, 8),
+stringsAsFactors = FALSE
+))
+}
+anova_results$F_Value <- round(anova_results$F_Value, 4)
+anova_results$P_Value <- round(anova_results$P_Value, 8)
+# View results sorted by significance
+#anova_results <- anova_results[order(anova_results$P_Value), ]
+print(anova_results)
+pearson_spearman <- data.frame(
+Variable = character(),
+Target = character(),
+Pearson_correlation = numeric(),
+Spearman_correlation = numeric()
+)
+for( column in numeric_column)
+{
+pearson <- cor(file[[column]], file$Attrition, method="pearson")
+spearman <- cor(file[[column]], file$Attrition, method="spearman")
+pearson_spearman <-rbind(pearson_spearman, data.frame(
+Variable = column,
+Target = "Attrition",
+Pearson_correlaton = pearson,
+Spearman_correlation = spearman
+))
+}
+print(pearson_spearman)
+numeric_column <- names(file)[sapply(file, function(x) is.numeric(x) || is.integer(x))]
+print(numeric_column)
+pearson_spearman <- data.frame(
+Variable = character(),
+Target = character(),
+Pearson_correlation = numeric(),
+Spearman_correlation = numeric()
+)
+for( column in numeric_column)
+{
+pearson <- cor(file[[column]], file$Attrition, method="pearson")
+spearman <- cor(file[[column]], file$Attrition, method="spearman")
+pearson_spearman <-rbind(pearson_spearman, data.frame(
+Variable = column,
+Target = "Attrition",
+Pearson_correlaton = pearson,
+Spearman_correlation = spearman
+))
+}
+print(pearson_spearman)
+print(anova_results)
+f_val
+result[[1]]
+result[[0]]
+result[[1]]
+result[[2]]
+for( col in catagorical_columns)
+{
+formula <- as.formula(paste("Attrition ~ ", col))
+result <- summary(aov(formula, data = file))
+f_val <- result$`F value`[1]
+p_val <- result$`Pr(>F)`[1]
+anova_results <- rbind(anova_results, data.frame(
+Variable = col,
+Target = "Attrition",
+F_Value = round(f_val, 4),
+P_Value = round(p_val, 8),
+stringsAsFactors = FALSE
+))
+}
+result
+anova_result$fitted.values
+anova_result$effects
+anova_result$assign
+result[[1]]$`F value`[1]  # = 368
+result[[1]]$`F value`[3]  # = 368
+result[[1]]$`F value`[2]  # = 368
+str(result)
+reult[1]
+reult[[1]
+result[1]
+result[[1]
+result[[1]]
+result[[1]]
+result[1]
+result[1][1]
+result[1][2]
+result[[1]]
+result[[1]][1]
+result[[1]][2]
+result[[1]][3]
+result[[1]][4]
+result[[1]][4][1]
+result[[1]][4][2]
+result[[1]][4][1]
+result[[1]]$`F value`
+result[[1]]$'F value'
+result[[1]]$'F value'[1]
+library('dplyr')
+file <- read.csv('data/train.csv')
+print(file)
+summary(file)
